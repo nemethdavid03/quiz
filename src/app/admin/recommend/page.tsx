@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { Button } from "@/components/ui/button";
 import { marked } from 'marked';
+import { motion } from 'framer-motion';
 
 const page = () => {
     const [cuisine, setCuisine] = useState('');
@@ -22,9 +23,23 @@ const page = () => {
     };
 
     return (
-        <div>
-            <h1 className="text-4xl font-bold mb-4">Gemini Food Recommender</h1>
-            <form onSubmit={handleSubmit} className="mb-8">
+        <div className="container mx-auto">
+            <motion.h1 
+                className="text-4xl font-bold mb-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+            >
+                Gemini Food Recommender
+            </motion.h1>
+
+            <motion.form 
+                onSubmit={handleSubmit} 
+                className="mb-8"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+            >
                 <div className="mb-4">
                     <label htmlFor="cuisine" className="block text-gray-700 font-bold mb-2">Cuisine:</label>
                     <select id="cuisine" value={cuisine} onChange={(e) => setCuisine(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
@@ -57,14 +72,27 @@ const page = () => {
                     </select>
                 </div>
 
-                <Button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Recommend</Button>
-            </form>
+                <motion.button
+                    type="submit"
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ duration: 0.1 }}
+                >
+                    Recommend
+                </motion.button>
+            </motion.form>
 
             {recommendation && (
-                <div className="mt-8" data-aos="fade-up" data-aos-duration="1000">
+                <motion.div 
+                    className="mt-8"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                >
                     <h2 className="text-2xl font-bold mb-4">Recommendation:</h2>
-                    <div className="bg-white p-4 rounded-md shadow-md" dangerouslySetInnerHTML={{ __html: marked(recommendation) }} />
-                </div>
+                    <div className="p-4 rounded-md shadow-md" dangerouslySetInnerHTML={{ __html: marked(recommendation) }} />
+                </motion.div>
             )}
         </div>
     );
