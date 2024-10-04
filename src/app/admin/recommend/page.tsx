@@ -8,8 +8,17 @@ import { motion } from 'framer-motion';
 const page = () => {
     const [cuisine, setCuisine] = useState('');
     const [diet, setDiet] = useState('');
-    const [intolerances, setIntolerances] = useState('');
+    const [intolerances, setIntolerances] = useState([]); // Changed to array
     const [recommendation, setRecommendation] = useState(null);
+
+    const handleIntoleranceChange = (e) => {
+        const newIntolerance = e.target.value;
+        if (intolerances.includes(newIntolerance)) {
+            setIntolerances(intolerances.filter(i => i !== newIntolerance));
+        } else {
+            setIntolerances([...intolerances, newIntolerance]);
+        }
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -17,7 +26,7 @@ const page = () => {
         const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_AI!);
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-        const prompt = `Javasolj egy ételt, amely ${cuisine ? cuisine : 'bármely konyha'} és ${diet ? diet : 'bármely diéta'} és ${intolerances ? 'mentes ' + intolerances : 'diétás korlátozás nélkül'}.`;
+        const prompt = `Javasolj egy ételt, amely ${cuisine ? cuisine : 'bármely konyha'} és ${diet ? diet : 'bármely diéta'} és ${intolerances.length > 0 ? 'mentes ' + intolerances.join(', ') : 'diétás korlátozás nélkül'}.`;
         const result = await model.generateContent(prompt);
         setRecommendation(result.response.text());
     };
@@ -64,13 +73,21 @@ const page = () => {
 
                 <div className="mb-4">
                     <label htmlFor="intolerances" className="block font-bold mb-2">Tűrések:</label>
-                    <input
-                        type="text"
-                        id="intolerances"
-                        value={intolerances}
-                        onChange={(e) => setIntolerances(e.target.value)}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-                    />
+                    <div className="flex flex-wrap gap-2">
+                        {intolerances.map((intolerance, index) => (
+                            <span key={index} className="bg-gray-200 px-3 py-1 rounded text-gray-700 mr-2 mb-2">
+                                {intolerance}
+                                <button onClick={() => handleIntoleranceChange({ target: { value: intolerance } })} className="ml-2 text-gray-500">x</button>
+                            </span>
+                        ))}
+                        <input
+                            type="text"
+                            id="intolerances"
+                            placeholder="Tűrések (pl. glutén, laktóz)"
+                            onChange={handleIntoleranceChange}
+                            className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+                        />
+                    </div>
                 </div>
 
                 <motion.button
