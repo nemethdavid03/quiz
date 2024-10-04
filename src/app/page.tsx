@@ -29,7 +29,7 @@ const HomePage = () => {
           Get your 5% discount today
         </Badge>
         <h1 className={`text-6xl lg:text-[84px] font-bold transition-opacity duration-700 relative z-10 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-          TYPE <span className='text-rose-500'>VIII</span>
+          TYPE <span className='text-rose-500'>X</span>
         </h1>
         <div className="relative z-10 text-center">Kickstart your application with TYPEX SAAS builder boilerplate.</div>
         <Button className='mt-8 relative z-10'>Get started for free</Button>
