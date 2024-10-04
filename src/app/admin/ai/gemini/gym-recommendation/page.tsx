@@ -82,7 +82,7 @@ const GymRecommendation = () => {
                 transition={{ duration: 0.5 }}
                 className="rounded p-4 mt-6"
             >
-                {workoutPlan && <pre>{workoutPlan}</pre>}
+                {workoutPlan && <pre className='max-w-7xl'>{workoutPlan}</pre>}
             </motion.div>
         </div>
     );
