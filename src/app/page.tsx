@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import UserInsertHandler from '@/lib/helpers/user.insert.handler';
 import { SignedIn } from '@clerk/nextjs';
 import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
 const HomePage = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -27,9 +28,14 @@ const HomePage = () => {
         <Badge className='mb-5 p-1.5 text-xs rounded-full mt-24 relative z-10'>
           Get your 5% discount today
         </Badge>
-        <h1 className={`text-6xl lg:text-[84px] font-bold transition-opacity duration-700 relative z-10 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+        <motion.h1
+          className={`text-6xl lg:text-[84px] font-bold transition-opacity duration-700 relative z-10 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.5 }}
+        >
           TYPE <span className='text-rose-500'>VIII</span>
-        </h1>
+        </motion.h1>
         <div className="relative z-10 text-center">Kickstart your application with TYPE VIII SAAS builder boilerplate.</div>
         <Button className='mt-8 relative z-10'>Get started for free</Button>
       </div>
@@ -75,10 +81,27 @@ const Pricing = () => {
 
   return (
     <section className="py-16">
-      <h2 className="text-3xl font-bold mb-8 text-center">Pricing Plans</h2>
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+      <motion.h2
+        className="text-3xl font-bold mb-8 text-center"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 1 }}
+      >
+        Pricing Plans
+      </motion.h2>
+      <motion.div
+        className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 1.5 }}
+      >
         {plans.map((plan, index) => (
-          <div key={index} className="rounded-lg shadow-md bg-white p-6">
+          <motion.div
+            key={index}
+            className="rounded-lg shadow-md bg-white p-6"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.2 }}
+          >
             <h3 className="text-xl font-bold mb-4">{plan.name}</h3>
             <div className="text-4xl font-bold mb-4">${plan.price}/month</div>
             <ul className="list-disc pl-6">
@@ -87,9 +110,9 @@ const Pricing = () => {
               ))}
             </ul>
             <Button className="mt-4 w-full">Choose Plan</Button>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 };
