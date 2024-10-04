@@ -3,6 +3,7 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import marked from 'marked'; // Add this import
 
 const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_AI!);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
@@ -27,10 +28,16 @@ const GymRecommendation = () => {
 
         try {
             const result = await model.generateContent(prompt);
-            setWorkoutPlan(result.response.text());
+            const plainText = result.response.text();
+            const formattedWorkoutPlan = formatWorkoutPlan(plainText);
+            setWorkoutPlan(formattedWorkoutPlan);
         } catch (error) {
             console.error('Error generating workout plan:', error);
         }
+    };
+
+    const formatWorkoutPlan = (planText) => {
+        return marked(planText); // Use marked to format as HTML
     };
 
     return (
@@ -82,7 +89,7 @@ const GymRecommendation = () => {
                 transition={{ duration: 0.5 }}
                 className="rounded p-4 mt-6"
             >
-                {workoutPlan && <pre className='max-w-7xl'>{workoutPlan}</pre>}
+                {workoutPlan && <div dangerouslySetInnerHTML={{ __html: workoutPlan }} />}
             </motion.div>
         </div>
     );
