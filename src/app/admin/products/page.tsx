@@ -8,6 +8,7 @@ import { Product } from "@prisma/client"; // Import Product
 import useSWR from "swr";
 import useCheckAccess from "@/lib/hooks/useCheckAccess"; // Import your access check hook
 import { Role } from "@prisma/client"; // Import Role
+import { useState } from "react";
 
 // Fetcher function to get data from the API
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
@@ -19,7 +20,9 @@ export default function Dashboard() {
     // Check specifically for ADMIN role
     const { hasAccess: isAdmin } = useCheckAccess([Role.ADMIN]);
 
-    const { data, error } = useSWR<Product[]>("/api/products", fetcher, { revalidateOnFocus: false });
+    const [searchTerm, setSearchTerm] = useState("");
+
+    const { data, error } = useSWR<Product[]>(`/api/users?searchTerm=${searchTerm}`, fetcher, { revalidateOnFocus: false });
 
     if (error) return <div>Error loading products.</div>;
     if (!data) return <Loading isLoading={!data} />;
@@ -30,7 +33,7 @@ export default function Dashboard() {
         if (!confirmed) return;
 
         try {
-            const response = await fetch(`/api/products/${productId}`, {
+            const response = await fetch(`/api/users/${productId}`, {
                 method: "DELETE",
             });
             if (!response.ok) throw new Error("Error deleting product");
@@ -46,8 +49,15 @@ export default function Dashboard() {
 
     return (
         <>
-            <div className="flex items-center">
+            <div className="flex items-center mb-4">
                 <h1 className="text-lg font-semibold md:text-2xl">Termékek</h1>
+                <input
+                    type="text"
+                    placeholder="Keresés..."
+                    className="ml-4 rounded-md border border-gray-300 px-3 py-2 focus:ring-blue-500 focus:ring-2 focus:ring-opacity-50"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
             </div>
             {data.length === 0 ? (
                 <div className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm">
