@@ -10,23 +10,55 @@ const page = () => {
     const [diet, setDiet] = useState('');
     const [intolerances, setIntolerances] = useState([]); // Changed to array
     const [recommendation, setRecommendation] = useState(null);
+    const [selectedIntolerances, setSelectedIntolerances] = useState([]);
+    const [inputValue, setInputValue] = useState('');
+    const [showSuggestions, setShowSuggestions] = useState(false);
+    const [suggestions, setSuggestions] = useState([]);
+
+    const predefinedIntolerances = ["Glutén", "Laktóz", "Tojás", "Szójabab", "Dió", "Mogyoró", "Szezámmag"];
 
     const handleIntoleranceChange = (e) => {
+        setInputValue(e.target.value);
         const newIntolerance = e.target.value;
-        if (intolerances.includes(newIntolerance)) {
-            setIntolerances(intolerances.filter(i => i !== newIntolerance));
-        } else {
-            setIntolerances([...intolerances, newIntolerance]);
+        if (predefinedIntolerances.includes(newIntolerance)) {
+            setSelectedIntolerances([...selectedIntolerances, newIntolerance]);
         }
     };
 
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            if (inputValue && !selectedIntolerances.includes(inputValue)) {
+                setSelectedIntolerances([...selectedIntolerances, inputValue]);
+                setInputValue('');
+            }
+        }
+    };
+
+    const handleFocus = () => {
+        const filteredSuggestions = predefinedIntolerances.filter(
+            (suggestion) => !selectedIntolerances.includes(suggestion) && suggestion.toLowerCase().startsWith(inputValue.toLowerCase())
+        );
+        setSuggestions(filteredSuggestions);
+        setShowSuggestions(true);
+    };
+
+    const handleBlur = () => {
+        setShowSuggestions(false);
+    };
+
+    const handleSuggestionClick = (suggestion) => {
+        setSelectedIntolerances([...selectedIntolerances, suggestion]);
+        setInputValue('');
+        setShowSuggestions(false);
+    };
+
     const handleSubmit = async (event) => {
-        event.preventDefault(); // Prevent default form submission
+        event.preventDefault(); 
 
         const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_AI!);
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-        const prompt = `Javasolj egy ételt, amely ${cuisine ? cuisine : 'bármely konyha'} és ${diet ? diet : 'bármely diéta'} és ${intolerances.length > 0 ? 'mentes ' + intolerances.join(', ') : 'diétás korlátozás nélkül'}.`;
+        const prompt = `Javasolj egy ételt, amely ${cuisine ? cuisine : 'bármely konyha'} és ${diet ? diet : 'bármely diéta'} és ${selectedIntolerances.length > 0 ? 'mentes ' + selectedIntolerances.join(', ') : 'diétás korlátozás nélkül'}.`;
         const result = await model.generateContent(prompt);
         setRecommendation(result.response.text());
     };
@@ -84,24 +116,35 @@ const page = () => {
                 <div className="mb-4">
                     <label htmlFor="intolerances" className="block font-bold mb-2">Tűrések:</label>
                     <div className="flex flex-wrap gap-2">
-                        {intolerances.map((intolerance, index) => (
+                        {selectedIntolerances.map((intolerance, index) => (
                             <span key={index} className="bg-gray-200 px-3 py-1 rounded text-gray-700 mr-2 mb-2">
                                 {intolerance}
-                                <button onClick={() => handleIntoleranceChange({ target: { value: intolerance } })} className="ml-2 text-gray-500">x</button>
+                                <button onClick={() => setSelectedIntolerances(selectedIntolerances.filter(i => i !== intolerance))} className="ml-2 text-gray-500">x</button>
                             </span>
                         ))}
-                        <select
+                        <input
+                            type="text"
                             id="intolerances"
-                            value=""
+                            value={inputValue}
                             onChange={handleIntoleranceChange}
+                            onKeyDown={handleKeyDown}
+                            onFocus={handleFocus}
+                            onBlur={handleBlur}
                             className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-                        >
-                            <option value="">Válassz tűrést</option>
-                            <option value="Glutén">Glutén</option>
-                            <option value="Laktóz">Laktóz</option>
-                            <option value="Tojás">Tojás</option>
-                            {/* Add more intolerance options here */}
-                        </select>
+                        />
+                        {showSuggestions && (
+                            <ul className="absolute bg-white shadow-md rounded mt-1 z-10">
+                                {suggestions.map((suggestion) => (
+                                    <li
+                                        key={suggestion}
+                                        onClick={() => handleSuggestionClick(suggestion)}
+                                        className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                                    >
+                                        {suggestion}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
                     </div>
                 </div>
 
