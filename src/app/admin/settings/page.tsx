@@ -39,6 +39,8 @@ const SettingsPage = () => {
                     <TabsTrigger value="general">General</TabsTrigger>
                     <TabsTrigger value="security">Security</TabsTrigger>
                     <TabsTrigger value="other">Other</TabsTrigger>
+                    <TabsTrigger value="notifications">Notifications</TabsTrigger>
+                    <TabsTrigger value="advanced">Advanced</TabsTrigger>
                 </TabsList>
                 <TabsContent value="general">
                     <div className="mb-4">
@@ -73,6 +75,10 @@ const SettingsPage = () => {
                                 <Label htmlFor="confirm-password">Confirm Password</Label>
                                 <Input id="confirm-password" type="password" placeholder="Confirm your password" />
                             </div>
+                            <div className="space-y-1">
+                                <Label htmlFor="two-factor-authentication">Two-factor Authentication</Label>
+                                <Input id="two-factor-authentication" type="checkbox" />
+                            </div>
                         </CardContent>
                         <CardFooter>
                             <Button>Save changes</Button>
@@ -95,6 +101,64 @@ const SettingsPage = () => {
                             <div className="space-y-1">
                                 <Label htmlFor="email">Email</Label>
                                 <Input id="email" type="email" placeholder="Enter your email address" />
+                            </div>
+                            <div className="space-y-1">
+                                <Label htmlFor="timezone">Timezone</Label>
+                                <select id="timezone" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                    <option value="UTC">UTC</option>
+                                    <option value="EST">EST</option>
+                                    <option value="PST">PST</option>
+                                </select>
+                            </div>
+                        </CardContent>
+                        <CardFooter>
+                            <Button>Save changes</Button>
+                        </CardFooter>
+                    </Card>
+                </TabsContent>
+                <TabsContent value="notifications">
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Notifications</CardTitle>
+                            <CardDescription>
+                                Manage your notification settings.
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent className="space-y-2">
+                            <div className="space-y-1">
+                                <Label htmlFor="email-notifications">Email Notifications</Label>
+                                <Input id="email-notifications" type="checkbox" />
+                            </div>
+                            <div className="space-y-1">
+                                <Label htmlFor="push-notifications">Push Notifications</Label>
+                                <Input id="push-notifications" type="checkbox" />
+                            </div>
+                            <div className="space-y-1">
+                                <Label htmlFor="in-app-notifications">In-App Notifications</Label>
+                                <Input id="in-app-notifications" type="checkbox" />
+                            </div>
+                        </CardContent>
+                        <CardFooter>
+                            <Button>Save changes</Button>
+                        </CardFooter>
+                    </Card>
+                </TabsContent>
+                <TabsContent value="advanced">
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Advanced</CardTitle>
+                            <CardDescription>
+                                Access more advanced settings.
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent className="space-y-2">
+                            <div className="space-y-1">
+                                <Label htmlFor="api-key">API Key</Label>
+                                <Input id="api-key" type="text" placeholder="Enter your API key" />
+                            </div>
+                            <div className="space-y-1">
+                                <Label htmlFor="debug-mode">Debug Mode</Label>
+                                <Input id="debug-mode" type="checkbox" />
                             </div>
                         </CardContent>
                         <CardFooter>
