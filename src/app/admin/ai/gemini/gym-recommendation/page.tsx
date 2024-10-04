@@ -78,7 +78,13 @@ const GymRecommendation = () => {
                         <option value="Home Equipment">Home Equipment</option>
                     </select>
                 </div>
-                <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Generate Workout Plan</button>
+                <button type="submit" disabled={isLoading} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                    {isLoading ? (
+                        <div className="animate-spin rounded-full h-6 w-6 border-4 border-t-4 border-white"></div>
+                    ) : (
+                        "Generate Workout Plan"
+                    )}
+                </button>
             </form>
 
             {isLoading && (
