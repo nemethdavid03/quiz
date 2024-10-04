@@ -36,7 +36,7 @@ const GymRecommendation = () => {
     return (
         <div className="container mx-auto p-8">
             <h1 className="text-4xl font-bold mb-8 text-center">Generate Your Personalized Workout Plan</h1>
-            <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <form onSubmit={handleSubmit} className="shadow rounded px-8 pt-6 pb-8 mb-4">
                 <div className="mb-4">
                     <label htmlFor="fitnessLevel" className="block text-gray-700 text-sm font-bold mb-2">Fitness Level:</label>
                     <select id="fitnessLevel" name="fitnessLevel" value={formData.fitnessLevel} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
@@ -80,7 +80,7 @@ const GymRecommendation = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="bg-gray-100 rounded p-4 mt-6"
+                className="rounded p-4 mt-6"
             >
                 {workoutPlan && <pre className="text-gray-700">{workoutPlan}</pre>}
             </motion.div>
