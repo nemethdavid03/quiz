@@ -11,9 +11,23 @@ const page = () => {
     const [intolerances, setIntolerances] = useState('');
     const [recommendation, setRecommendation] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [showForm, setShowForm] = useState(true);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setIsLoading(true);
+
+        const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_AI!);
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+        const prompt = `Javasolj egy ételt, amely ${cuisine ? cuisine : 'bármely konyha'} és ${diet ? diet : 'bármely diéta'} és ${intolerances ? 'mentes ' + intolerances : 'diétás korlátozás nélkül'}.`;
+        const result = await model.generateContent(prompt);
+        setRecommendation(result.response.text());
+        setIsLoading(false);
+        setShowForm(false);
+    };
+
+    const handleRegenerate = async () => {
         setIsLoading(true);
 
         const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_AI!);
@@ -36,18 +50,7 @@ const page = () => {
                 Gemini Ételjavasló
             </motion.h1>
 
-            {recommendation ? (
-                <motion.div
-                    className="mt-8"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, ease: "easeInOut" }}
-                >
-                    <h2 className="text-2xl font-bold mb-4">Javaslat:</h2>
-                    <div className="p-4 rounded-md shadow-md" dangerouslySetInnerHTML={{ __html: marked(recommendation) }} />
-                    <Button className="mt-4">Rendelés</Button>
-                </motion.div>
-            ) : (
+            {showForm ? (
                 <motion.form
                     onSubmit={handleSubmit}
                     className="mb-8"
@@ -98,6 +101,18 @@ const page = () => {
                         {isLoading ? 'Betöltés...' : 'Javasolj'}
                     </motion.button>
                 </motion.form>
+            ) : (
+                <motion.div
+                    className="mt-8"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                >
+                    <h2 className="text-2xl font-bold mb-4">Javaslat:</h2>
+                    <div className="p-4 rounded-md shadow-md" dangerouslySetInnerHTML={{ __html: marked(recommendation) }} />
+                    <Button className="mt-4" onClick={() => setShowForm(true)}>Vissza a űrlaphoz</Button>
+                    <Button className="mt-4" onClick={handleRegenerate} disabled={isLoading}>Újra generálás</Button>
+                </motion.div>
             )}
         </div>
     );
