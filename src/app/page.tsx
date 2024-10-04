@@ -27,7 +27,7 @@ const HomePage = () => {
         <Stars />
         <motion.h1
           className={`text-6xl lg:text-[84px] font-bold transition-opacity duration-700 relative z-10 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
         >
@@ -35,7 +35,7 @@ const HomePage = () => {
         </motion.h1>
         <motion.div
           className="relative z-10 text-center"
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
         >
@@ -43,7 +43,7 @@ const HomePage = () => {
         </motion.div>
         <motion.div
           className='mt-8 relative z-10'
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
         >
