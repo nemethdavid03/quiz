@@ -27,8 +27,8 @@ const SettingsPage = () => {
         setLanguage(event.target.value);
     };
 
-    const handleTabChange = (event) => {
-        setTab(event.target.value);
+    const handleTabChange = (value) => {
+        setTab(value);
     };
 
     return (
