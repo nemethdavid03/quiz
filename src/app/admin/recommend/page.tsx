@@ -1,4 +1,4 @@
-
+```javascript
 "use client"
 import React, { useState } from 'react'
 import { GoogleGenerativeAI } from "@google/generative-ai";
@@ -17,8 +17,8 @@ const page = () => {
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const prompt = `Suggest a dish that is ${cuisine ? cuisine : 'any cuisine'} and is ${diet ? diet : 'any diet'} and is ${intolerances ? 'free of ' + intolerances : 'no dietary restrictions'}.`;
-    const response = await model.generateText(prompt);
-    setRecommendation(response.text);
+    const result = await model.generateContent(prompt);
+    setRecommendation(result.response.text());
   };
 
   return (
@@ -65,3 +65,4 @@ const page = () => {
 };
 
 export default page
+```
