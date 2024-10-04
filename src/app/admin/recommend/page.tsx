@@ -42,23 +42,58 @@ const page = () => {
             >
                 <div className="mb-4">
                     <label htmlFor="cuisine" className="block font-bold mb-2">Konyha:</label>
-                    <select id="cuisine" value={cuisine} onChange={(e) => setCuisine(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline">
-                        <option value="">Bármely</option>
-                        <option value="olasz">Olasz</option>
-                        <option value="mexikói">Mexikói</option>
-                        <option value="indiai">Indiai</option>
+                    <div className="flex flex-wrap gap-2">
+                        <button 
+                            className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
+                            onClick={() => setCuisine('')}
+                        >
+                            Bármely
+                        </button>
+                        <button 
+                            className={`bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${cuisine === 'olasz' ? 'bg-blue-500 text-white' : ''}`}
+                            onClick={() => setCuisine('olasz')}
+                        >
+                            Olasz
+                        </button>
+                        <button 
+                            className={`bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${cuisine === 'mexikói' ? 'bg-blue-500 text-white' : ''}`}
+                            onClick={() => setCuisine('mexikói')}
+                        >
+                            Mexikói
+                        </button>
+                        <button 
+                            className={`bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${cuisine === 'indiai' ? 'bg-blue-500 text-white' : ''}`}
+                            onClick={() => setCuisine('indiai')}
+                        >
+                            Indiai
+                        </button>
                         {/* Add more cuisines here */}
-                    </select>
+                    </div>
                 </div>
 
                 <div className="mb-4">
                     <label htmlFor="diet" className="block font-bold mb-2">Diéta:</label>
-                    <select id="diet" value={diet} onChange={(e) => setDiet(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline">
-                        <option value="">Bármely</option>
-                        <option value="vegetáriánus">Vegetáriánus</option>
-                        <option value="vegán">Vegán</option>
+                    <div className="flex flex-wrap gap-2">
+                        <button 
+                            className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
+                            onClick={() => setDiet('')}
+                        >
+                            Bármely
+                        </button>
+                        <button 
+                            className={`bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${diet === 'vegetáriánus' ? 'bg-blue-500 text-white' : ''}`}
+                            onClick={() => setDiet('vegetáriánus')}
+                        >
+                            Vegetáriánus
+                        </button>
+                        <button 
+                            className={`bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${diet === 'vegán' ? 'bg-blue-500 text-white' : ''}`}
+                            onClick={() => setDiet('vegán')}
+                        >
+                            Vegán
+                        </button>
                         {/* Add more diets here */}
-                    </select>
+                    </div>
                 </div>
 
                 <div className="mb-4">
