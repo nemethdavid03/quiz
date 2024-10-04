@@ -1,7 +1,18 @@
 "use client"
 
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import React, { useState } from 'react'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from 'shadcn-ui'
+import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 
 const SettingsPage = () => {
     const [theme, setTheme] = useState('light');
@@ -46,16 +57,50 @@ const SettingsPage = () => {
                     </div>
                 </TabsContent>
                 <TabsContent value="security">
-                    <div>
-                        {/* Add security settings here */}
-                        <p>Security settings content</p>
-                    </div>
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Security</CardTitle>
+                            <CardDescription>
+                                Manage your account security settings here.
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent className="space-y-2">
+                            <div className="space-y-1">
+                                <Label htmlFor="password">Password</Label>
+                                <Input id="password" type="password" placeholder="Enter your password" />
+                            </div>
+                            <div className="space-y-1">
+                                <Label htmlFor="confirm-password">Confirm Password</Label>
+                                <Input id="confirm-password" type="password" placeholder="Confirm your password" />
+                            </div>
+                        </CardContent>
+                        <CardFooter>
+                            <Button>Save changes</Button>
+                        </CardFooter>
+                    </Card>
                 </TabsContent>
                 <TabsContent value="other">
-                    <div>
-                        {/* Add other settings here */}
-                        <p>Other settings content</p>
-                    </div>
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Other</CardTitle>
+                            <CardDescription>
+                                Miscellaneous settings.
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent className="space-y-2">
+                            <div className="space-y-1">
+                                <Label htmlFor="notifications">Notifications</Label>
+                                <Input id="notifications" type="checkbox" />
+                            </div>
+                            <div className="space-y-1">
+                                <Label htmlFor="email">Email</Label>
+                                <Input id="email" type="email" placeholder="Enter your email address" />
+                            </div>
+                        </CardContent>
+                        <CardFooter>
+                            <Button>Save changes</Button>
+                        </CardFooter>
+                    </Card>
                 </TabsContent>
             </Tabs>
         </div>
