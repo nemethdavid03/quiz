@@ -4,7 +4,7 @@ import Loading from "@/components/Loading";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import GridLayout from "@/components/ui/gridLayout";
-import { User } from "@prisma/client";
+import { Product } from "@prisma/client"; // Import Product
 import useSWR from "swr";
 import useCheckAccess from "@/lib/hooks/useCheckAccess"; // Import your access check hook
 import { Role } from "@prisma/client"; // Import Role
@@ -19,24 +19,24 @@ export default function Dashboard() {
     // Check specifically for ADMIN role
     const { hasAccess: isAdmin } = useCheckAccess([Role.ADMIN]);
 
-    const { data, error } = useSWR<User[]>("/api/users", fetcher, { revalidateOnFocus: false });
+    const { data, error } = useSWR<Product[]>("/api/products", fetcher, { revalidateOnFocus: false });
 
-    if (error) return <div>Error loading users.</div>;
+    if (error) return <div>Error loading products.</div>;
     if (!data) return <Loading isLoading={!data} />;
 
-    // Delete a user
-    const handleDelete = async (userId: number) => {
-        const confirmed = confirm("Are you sure you want to delete this user?");
+    // Delete a product
+    const handleDelete = async (productId: number) => {
+        const confirmed = confirm("Are you sure you want to delete this product?");
         if (!confirmed) return;
 
         try {
-            const response = await fetch(`/api/users/${userId}`, {
+            const response = await fetch(`/api/products/${productId}`, {
                 method: "DELETE",
             });
-            if (!response.ok) throw new Error("Error deleting user");
-            // Optionally, you can re-fetch the user data or mutate the SWR cache here
+            if (!response.ok) throw new Error("Error deleting product");
+            // Optionally, you can re-fetch the product data or mutate the SWR cache here
         } catch (error) {
-            console.error("Failed to delete user:", error);
+            console.error("Failed to delete product:", error);
         }
     };
 
@@ -61,15 +61,15 @@ export default function Dashboard() {
                 </div>
             ) : (
                 <GridLayout className="grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
-                    {data.map((user) => (
-                        <Card key={user.id} className="">
+                    {data.map((product) => (
+                        <Card key={product.id} className="">
                             <CardHeader>
-                                <CardTitle>{user.name}</CardTitle>
-                                <CardDescription>{user.email}</CardDescription>
+                                <CardTitle>{product.name}</CardTitle>
+                                <CardDescription>{product.description}</CardDescription>
                             </CardHeader>
                             <CardContent>
                                 {isAdmin && (
-                                    <Button onClick={() => handleDelete(Number(user.id))} variant="destructive">
+                                    <Button onClick={() => handleDelete(Number(product.id))} variant="destructive">
                                         Delete
                                     </Button>
                                 )}
