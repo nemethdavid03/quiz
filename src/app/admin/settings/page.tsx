@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Checkbox } from "@/components/ui/checkbox"
 
 const SettingsPage = () => {
     const [theme, setTheme] = useState('light');
@@ -75,9 +76,9 @@ const SettingsPage = () => {
                                 <Label htmlFor="confirm-password">Confirm Password</Label>
                                 <Input id="confirm-password" type="password" placeholder="Confirm your password" />
                             </div>
-                            <div className="space-y-1">
-                                <Label htmlFor="two-factor-authentication">Two-factor Authentication</Label>
-                                <Input id="two-factor-authentication" type="checkbox" />
+                            <div className="flex items-center space-x-2">
+                                <Checkbox id="two-factor-authentication" />
+                                <label htmlFor="two-factor-authentication" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Two-factor Authentication</label>
                             </div>
                         </CardContent>
                         <CardFooter>
@@ -94,9 +95,9 @@ const SettingsPage = () => {
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-2">
-                            <div className="space-y-1">
-                                <Label htmlFor="notifications">Notifications</Label>
-                                <Input id="notifications" type="checkbox" />
+                            <div className="flex items-center space-x-2">
+                                <Checkbox id="notifications" />
+                                <label htmlFor="notifications" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Notifications</label>
                             </div>
                             <div className="space-y-1">
                                 <Label htmlFor="email">Email</Label>
@@ -125,17 +126,17 @@ const SettingsPage = () => {
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-2">
-                            <div className="space-y-1">
-                                <Label htmlFor="email-notifications">Email Notifications</Label>
-                                <Input id="email-notifications" type="checkbox" />
+                            <div className="flex items-center space-x-2">
+                                <Checkbox id="email-notifications" />
+                                <label htmlFor="email-notifications" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Email Notifications</label>
                             </div>
-                            <div className="space-y-1">
-                                <Label htmlFor="push-notifications">Push Notifications</Label>
-                                <Input id="push-notifications" type="checkbox" />
+                            <div className="flex items-center space-x-2">
+                                <Checkbox id="push-notifications" />
+                                <label htmlFor="push-notifications" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Push Notifications</label>
                             </div>
-                            <div className="space-y-1">
-                                <Label htmlFor="in-app-notifications">In-App Notifications</Label>
-                                <Input id="in-app-notifications" type="checkbox" />
+                            <div className="flex items-center space-x-2">
+                                <Checkbox id="in-app-notifications" />
+                                <label htmlFor="in-app-notifications" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">In-App Notifications</label>
                             </div>
                         </CardContent>
                         <CardFooter>
@@ -156,9 +157,9 @@ const SettingsPage = () => {
                                 <Label htmlFor="api-key">API Key</Label>
                                 <Input id="api-key" type="text" placeholder="Enter your API key" />
                             </div>
-                            <div className="space-y-1">
-                                <Label htmlFor="debug-mode">Debug Mode</Label>
-                                <Input id="debug-mode" type="checkbox" />
+                            <div className="flex items-center space-x-2">
+                                <Checkbox id="debug-mode" />
+                                <label htmlFor="debug-mode" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Debug Mode</label>
                             </div>
                         </CardContent>
                         <CardFooter>
