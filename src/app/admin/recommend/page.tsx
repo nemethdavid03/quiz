@@ -17,7 +17,7 @@ const page = () => {
         const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_AI!);
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-        const prompt = `Suggest a dish that is ${cuisine ? cuisine : 'any cuisine'} and is ${diet ? diet : 'any diet'} and is ${intolerances ? 'free of ' + intolerances : 'no dietary restrictions'}.`;
+        const prompt = `Javasolj egy ételt, amely ${cuisine ? cuisine : 'bármely konyha'} és ${diet ? diet : 'bármely diéta'} és ${intolerances ? 'mentes ' + intolerances : 'diétás korlátozás nélkül'}.`;
         const result = await model.generateContent(prompt);
         setRecommendation(result.response.text());
     };
@@ -30,7 +30,7 @@ const page = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: "easeInOut" }}
             >
-                Gemini Food Recommender
+                Gemini Ételjavasló
             </motion.h1>
 
             <motion.form 
@@ -41,33 +41,33 @@ const page = () => {
                 transition={{ duration: 0.5, ease: "easeInOut" }}
             >
                 <div className="mb-4">
-                    <label htmlFor="cuisine" className="block text-gray-700 font-bold mb-2">Cuisine:</label>
-                    <select id="cuisine" value={cuisine} onChange={(e) => setCuisine(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                        <option value="">Any</option>
-                        <option value="italian">Italian</option>
-                        <option value="mexican">Mexican</option>
-                        <option value="indian">Indian</option>
+                    <label htmlFor="cuisine" className="block font-bold mb-2">Konyha:</label>
+                    <select id="cuisine" value={cuisine} onChange={(e) => setCuisine(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline">
+                        <option value="">Bármely</option>
+                        <option value="olasz">Olasz</option>
+                        <option value="mexikói">Mexikói</option>
+                        <option value="indiai">Indiai</option>
                         {/* Add more cuisines here */}
                     </select>
                 </div>
 
                 <div className="mb-4">
-                    <label htmlFor="diet" className="block text-gray-700 font-bold mb-2">Diet:</label>
-                    <select id="diet" value={diet} onChange={(e) => setDiet(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                        <option value="">Any</option>
-                        <option value="vegetarian">Vegetarian</option>
-                        <option value="vegan">Vegan</option>
+                    <label htmlFor="diet" className="block font-bold mb-2">Diéta:</label>
+                    <select id="diet" value={diet} onChange={(e) => setDiet(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline">
+                        <option value="">Bármely</option>
+                        <option value="vegetáriánus">Vegetáriánus</option>
+                        <option value="vegán">Vegán</option>
                         {/* Add more diets here */}
                     </select>
                 </div>
 
                 <div className="mb-4">
-                    <label htmlFor="intolerances" className="block text-gray-700 font-bold mb-2">Intolerances:</label>
-                    <select id="intolerances" value={intolerances} onChange={(e) => setIntolerances(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                        <option value="">None</option>
-                        <option value="gluten">Gluten</option>
-                        <option value="dairy">Dairy</option>
-                        <option value="nuts">Nuts</option>
+                    <label htmlFor="intolerances" className="block font-bold mb-2">Tűrések:</label>
+                    <select id="intolerances" value={intolerances} onChange={(e) => setIntolerances(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline">
+                        <option value="">Nincs</option>
+                        <option value="glutén">Glutén</option>
+                        <option value="tej">Tej</option>
+                        <option value="dió">Dió</option>
                         {/* Add more intolerances here */}
                     </select>
                 </div>
@@ -79,7 +79,7 @@ const page = () => {
                     whileTap={{ scale: 0.95 }}
                     transition={{ duration: 0.1 }}
                 >
-                    Recommend
+                    Javasolj
                 </motion.button>
             </motion.form>
 
@@ -90,8 +90,9 @@ const page = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                 >
-                    <h2 className="text-2xl font-bold mb-4">Recommendation:</h2>
+                    <h2 className="text-2xl font-bold mb-4">Javaslat:</h2>
                     <div className="p-4 rounded-md shadow-md" dangerouslySetInnerHTML={{ __html: marked(recommendation) }} />
+                    <Button className="mt-4">Rendelés</Button>
                 </motion.div>
             )}
         </div>
