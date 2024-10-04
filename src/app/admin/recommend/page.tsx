@@ -21,7 +21,7 @@ const page = () => {
     };
 
     const handleSubmit = async (event) => {
-        event.preventDefault();
+        event.preventDefault(); // Prevent default form submission
 
         const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_AI!);
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
@@ -51,24 +51,34 @@ const page = () => {
             >
                 <div className="mb-4">
                     <label htmlFor="cuisine" className="block font-bold mb-2">Konyha:</label>
-                    <input
-                        type="text"
+                    <select
                         id="cuisine"
                         value={cuisine}
                         onChange={(e) => setCuisine(e.target.value)}
                         className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-                    />
+                    >
+                        <option value="">Válassz konyhát</option>
+                        <option value="Magyar">Magyar</option>
+                        <option value="Olasz">Olasz</option>
+                        <option value="Kínai">Kínai</option>
+                        {/* Add more cuisine options here */}
+                    </select>
                 </div>
 
                 <div className="mb-4">
                     <label htmlFor="diet" className="block font-bold mb-2">Diéta:</label>
-                    <input
-                        type="text"
+                    <select
                         id="diet"
                         value={diet}
                         onChange={(e) => setDiet(e.target.value)}
                         className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-                    />
+                    >
+                        <option value="">Válassz diétát</option>
+                        <option value="Vegetáriánus">Vegetáriánus</option>
+                        <option value="Vegán">Vegán</option>
+                        <option value="Paleo">Paleo</option>
+                        {/* Add more diet options here */}
+                    </select>
                 </div>
 
                 <div className="mb-4">
@@ -80,13 +90,18 @@ const page = () => {
                                 <button onClick={() => handleIntoleranceChange({ target: { value: intolerance } })} className="ml-2 text-gray-500">x</button>
                             </span>
                         ))}
-                        <input
-                            type="text"
+                        <select
                             id="intolerances"
-                            placeholder="Tűrések (pl. glutén, laktóz)"
+                            value=""
                             onChange={handleIntoleranceChange}
                             className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-                        />
+                        >
+                            <option value="">Válassz tűrést</option>
+                            <option value="Glutén">Glutén</option>
+                            <option value="Laktóz">Laktóz</option>
+                            <option value="Tojás">Tojás</option>
+                            {/* Add more intolerance options here */}
+                        </select>
                     </div>
                 </div>
 
