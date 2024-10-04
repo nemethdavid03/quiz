@@ -41,14 +41,14 @@ const HomePage = () => {
         >
           Kickstart your application with TYPE VIII SAAS builder boilerplate.
         </motion.div>
-        <motion.button
+        <motion.div
           className='mt-8 relative z-10'
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
         >
           <Button>Get started for free</Button>
-        </motion.button>
+        </motion.div>
       </div>
       <Pricing />
     </>
