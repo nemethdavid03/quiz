@@ -1,0 +1,121 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql" // or any other supported database
+  url      = env("DATABASE_URL")
+}
+
+// Enum to define user roles
+enum Role {
+  ADMIN
+  VENDOR
+  MODERATOR
+  USER
+}
+
+// Model for User
+model User {
+  id           Int           @id @default(autoincrement())
+  clerkId      String        @unique
+  name         String?       @db.Text()
+  email        String        @unique
+  role         Role          @default(USER)
+  transactions Transaction[] // Relation to Transaction model
+  products     Product[] // Products listed by the user if the user is a vendor
+  createdAt    DateTime?     @default(now())
+  updatedAt    DateTime?     @updatedAt
+  orders       Order[] // Orders made by the user
+  reviews      Review[] // Reviews written by the user
+}
+
+// Model for Product
+model Product {
+  id          Int            @id @default(autoincrement())
+  vendor      User           @relation(fields: [vendorId], references: [id])
+  vendorId    Int
+  name        String         @db.Text()
+  description String         @db.Text()
+  price       Float
+  stock       Int            @default(0) // Number of items available
+  category    Category       @relation(fields: [categoryId], references: [id])
+  categoryId  Int
+  images      Image[] // Relation to Image model
+  orders      OrderProduct[] // Relation to OrderProduct model
+  reviews     Review[] // Reviews related to the product
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  Transaction Transaction[]
+}
+
+// Model for Image
+model Image {
+  id        Int     @id @default(autoincrement())
+  url       String  @db.Text() // URL of the image
+  product   Product @relation(fields: [productId], references: [id])
+  productId Int
+}
+
+// Model for Category
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String    @unique
+  products Product[] // Relation to Product model
+}
+
+// Model for Order
+model Order {
+  id          Int            @id @default(autoincrement())
+  user        User           @relation(fields: [userId], references: [id])
+  userId      Int
+  products    OrderProduct[] // Relation to OrderProduct model
+  totalAmount Float
+  status      OrderStatus    @default(PENDING)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+}
+
+// Model for OrderProduct to handle many-to-many relationship
+model OrderProduct {
+  id        Int     @id @default(autoincrement())
+  order     Order   @relation(fields: [orderId], references: [id])
+  orderId   Int
+  product   Product @relation(fields: [productId], references: [id])
+  productId Int
+  quantity  Int     @default(1) // Quantity of the product in the order
+}
+
+// Enum to define order statuses
+enum OrderStatus {
+  PENDING
+  SHIPPED
+  DELIVERED
+  CANCELED
+}
+
+// Model for Transaction
+model Transaction {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id]) // Foreign key reference to User
+  userId    Int // User ID as a foreign key
+  product   Product  @relation(fields: [productId], references: [id]) // Foreign key reference to Product
+  productId Int // Product ID as a foreign key
+  amount    Float
+  status    String // e.g., "SUCCESS", "FAILED"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Model for Reviews
+model Review {
+  id        Int      @id @default(autoincrement())
+  product   Product  @relation(fields: [productId], references: [id])
+  productId Int
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  rating    Int      @default(0) // Rating out of 5
+  comment   String?  @db.Text() // Optional comment
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
