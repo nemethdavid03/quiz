@@ -2,7 +2,6 @@
 
 import Stars from '@/components/effects/stars';
 import Navbar from '@/components/Navbar';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import UserInsertHandler from '@/lib/helpers/user.insert.handler';
 import { SignedIn } from '@clerk/nextjs';
@@ -26,16 +25,6 @@ const HomePage = () => {
       <Navbar />
       <div className='relative flex flex-col items-center justify-start h-fit'>
         <Stars />
-        <motion.div
-          className='mb-5 p-1.5 text-xs rounded-full mt-24 relative z-10'
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
-        >
-          <Badge>
-            Get your 5% discount today
-          </Badge>
-        </motion.div>
         <motion.h1
           className={`text-6xl lg:text-[84px] font-bold transition-opacity duration-700 relative z-10 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
           initial={{ opacity: 0, y: 50 }}
