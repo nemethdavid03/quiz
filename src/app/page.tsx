@@ -29,9 +29,9 @@ const HomePage = () => {
           Get your 5% discount today
         </Badge>
         <h1 className={`text-6xl lg:text-[84px] font-bold transition-opacity duration-700 relative z-10 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-          Public <span className='text-rose-500'>Scout</span>
+          TYPE <span className='text-rose-500'>VIII</span>
         </h1>
-        <div className="relative z-10 text-center">Kickstart your application with Public Scout SAAS builder boilerplate.</div>
+        <div className="relative z-10 text-center">Kickstart your application with TYPE VIII SAAS builder boilerplate.</div>
         <Button className='mt-8 relative z-10'>Get started for free</Button>
       </div>
       {/* <Pricing /> */}
