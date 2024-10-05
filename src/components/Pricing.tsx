@@ -55,15 +55,15 @@ export const Pricing = () => {
             >
                 Pricing Plans
             </motion.h2>
-            <div className="flex justify-center mb-8">
+            <div className="flex items-center space-x-2 mb-8">
                 <Switch
+                    id="annual-billing"
                     checked={isAnnual}
                     onChange={() => setIsAnnual(!isAnnual)}
-                    className="mr-2"
                 />
-                <span className="text-gray-600 font-medium">
+                <label htmlFor="annual-billing" className="text-gray-600 font-medium">
                     {isAnnual ? 'Annual' : 'Monthly'} Billing
-                </span>
+                </label>
             </div>
             <motion.div
                 className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8"
