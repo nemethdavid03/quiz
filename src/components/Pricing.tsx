@@ -1,9 +1,8 @@
-
 "use client"
 
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
-import { Switch } from "./ui/switch";
+import { Switch } from "./ui/switch"; 
 import React from 'react';
 
 export const Pricing = () => {
@@ -60,7 +59,7 @@ export const Pricing = () => {
                 <Switch
                     id="annual-billing"
                     checked={isAnnual}
-                    onChange={() => setIsAnnual(!isAnnual)} // This is the fix - make sure to toggle the state on change
+                    onCheckedChange={() => setIsAnnual((prev) => !prev)} 
                 />
                 <label htmlFor="annual-billing" className="text-gray-600 font-medium">
                     {isAnnual ? 'Annual' : 'Monthly'} Billing
@@ -77,16 +76,17 @@ export const Pricing = () => {
                         key={index}
                         className="rounded-lg shadow-md border p-6 hover:shadow-yellow-500 duration-300"
                         transition={{ duration: 0.2 }}
+                        variants={{
+                            visible: { opacity: 1, y: 0 },
+                            hidden: { opacity: 0, y: 20 },
+                        }}
+                        initial="hidden"
+                        animate={isAnnual ? "visible" : "hidden"}
                     >
                         <h3 className="text-xl font-bold mb-4">{plan.name}</h3>
                         <div className="text-4xl font-bold mb-4">
                             ${isAnnual ? plan.annualPrice : plan.price}/
                             {isAnnual ? 'year' : 'month'}
-                            {isAnnual && plan.annualPrice > 0 && (
-                                <span className="text-gray-500 font-medium ml-2">
-                                    (Save {Math.round(((plan.annualPrice - plan.price * 12) / plan.annualPrice) * 100)}%)
-                                </span>
-                            )}
                         </div>
                         <ul>
                             {plan.features.map((feature, i) => (
