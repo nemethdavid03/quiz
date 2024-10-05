@@ -172,6 +172,38 @@ const StartupTemplate = () => {
         </div>
       </section>
 
+      <section className="container mx-auto py-12">
+        <h2 className="text-3xl font-bold text-gray-800 mb-4 text-center">
+          See the Difference
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+          <div className="bg-red-100 rounded-md shadow-md p-6">
+            <h3 className="text-xl font-bold text-gray-800 mb-2">
+              Without My Startup
+            </h3>
+            <p className="text-gray-600 mb-4">
+              - Inefficient processes
+              - Slow growth
+              - Limited features
+              - Manual tasks
+              - Frustration
+            </p>
+          </div>
+          <div className="bg-green-100 rounded-md shadow-md p-6">
+            <h3 className="text-xl font-bold text-gray-800 mb-2">
+              With My Startup
+            </h3>
+            <p className="text-gray-600 mb-4">
+              - Streamlined workflows
+              - Rapid growth
+              - Powerful features
+              - Automation
+              - Success
+            </p>
+          </div>
+        </div>
+      </section>
+
       <footer className="bg-gray-800 text-white py-6 mt-12">
         <div className="container mx-auto text-center">
           <p className="text-sm">&copy; 2023 My Startup. All rights reserved.</p>
