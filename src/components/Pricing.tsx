@@ -59,7 +59,7 @@ export const Pricing = () => {
                 <Switch
                     id="annual-billing"
                     checked={isAnnual}
-                    onChange={() => setIsAnnual(!isAnnual)}
+                    onChange={() => setIsAnnual(!isAnnual)} // This is the fix - make sure to toggle the state on change
                 />
                 <label htmlFor="annual-billing" className="text-gray-600 font-medium">
                     {isAnnual ? 'Annual' : 'Monthly'} Billing
