@@ -52,10 +52,12 @@ const HomePage = () => {
       </div>
       <div className='bg-gray-100 py-24'>
         <div className='container mx-auto px-4'>
-          <div className='flex flex-col items-center justify-center gap-8'>
-            <h2 className='text-3xl font-bold text-gray-800'>Website Preview</h2>
-            <img src='/images/website-preview.png' alt='Website Preview' className='rounded-lg shadow-lg' />
-            <div className='text-center'>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
+            <div className='flex flex-col items-center justify-center'>
+              <h2 className='text-3xl font-bold text-gray-800'>Website Preview</h2>
+              <img src='/images/website-preview.png' alt='Website Preview' className='rounded-lg shadow-lg' />
+            </div>
+            <div className='flex flex-col items-center justify-center'>
               <h3 className='text-2xl font-bold text-gray-800'>Start Building Your Dream Website Today</h3>
               <p className='text-gray-600'>Get access to all the tools you need to create a stunning and functional website.</p>
               <Button>Get Started</Button>
