@@ -61,9 +61,19 @@ export const Pricing = () => {
                     checked={isAnnual}
                     onCheckedChange={() => setIsAnnual((prev) => !prev)} 
                 />
-                <label htmlFor="annual-billing" className="text-gray-600 font-medium">
+                <motion.label 
+                    htmlFor="annual-billing" 
+                    className="text-gray-600 font-medium"
+                    variants={{
+                        visible: { opacity: 1, y: 0 },
+                        hidden: { opacity: 0, y: 20 },
+                    }}
+                    initial="hidden"
+                    animate={isAnnual ? "visible" : "hidden"}
+                    transition={{ duration: 0.2 }}
+                >
                     {isAnnual ? 'Annual' : 'Monthly'} Billing
-                </label>
+                </motion.label>
             </div>
             <motion.div
                 className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8"
