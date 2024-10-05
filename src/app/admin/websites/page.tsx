@@ -5,28 +5,28 @@ const StartupTemplate = () => {
     <div className="bg-gray-100 min-h-screen">
       <header className="bg-white shadow-md">
         <div className="container mx-auto py-4 px-6 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-gray-800">AI Legal Assistant</h1>
+          <h1 className="text-2xl font-bold">AI Legal Assistant</h1>
           <nav>
             <ul className="flex space-x-6">
               <li>
-                <a href="#" className="text-gray-600 hover:text-gray-800">
+                <a href="#" className="hover:text-gray-800">
                   Features
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-gray-800">
+                <a href="#" className="hover:text-gray-800">
                   Pricing
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-gray-800">
+                <a href="#" className="hover:text-gray-800">
                   About
                 </a>
               </li>
               <li>
                 <a
                   href="#"
-                  className="bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600"
+                  className="font-bold py-2 px-4 rounded-md hover:bg-blue-600"
                 >
                   Get Started
                 </a>
@@ -39,16 +39,16 @@ const StartupTemplate = () => {
       <section className="container mx-auto py-12">
         <div className="flex flex-col md:flex-row items-center">
           <div className="md:w-1/2">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">
+            <h2 className="text-4xl font-bold mb-4">
               Streamline Your Legal Workflow
             </h2>
-            <p className="text-gray-600 mb-6">
+            <p className="mb-6">
               Our AI-powered legal assistant helps you automate tasks, improve
               efficiency, and focus on what matters most - your clients.
             </p>
             <a
               href="#"
-              className="bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600"
+              className="font-bold py-2 px-4 rounded-md hover:bg-blue-600"
             >
               Learn More
             </a>
@@ -63,38 +63,38 @@ const StartupTemplate = () => {
         </div>
       </section>
 
-      <section className="container mx-auto py-12 bg-gray-200">
-        <h2 className="text-3xl font-bold text-gray-800 mb-4 text-center">
+      <section className="container mx-auto py-12">
+        <h2 className="text-3xl font-bold mb-4 text-center">
           Pricing Plans
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-          <div className="bg-white rounded-md shadow-md p-6 text-center">
-            <h3 className="text-xl font-bold text-gray-800 mb-2">
+          <div className="rounded-md shadow-md p-6 text-center">
+            <h3 className="text-xl font-bold mb-2">
               Basic Plan
             </h3>
-            <p className="text-gray-600 mb-4">
+            <p className="mb-4">
               Ideal for solo practitioners and small firms. Includes core features
               like document review, contract analysis, and legal research.
             </p>
-            <div className="font-bold text-gray-800 text-2xl mb-4">$499 One-Time Payment</div>
+            <div className="font-bold text-2xl mb-4">$499 One-Time Payment</div>
             <button
-              className="bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600"
+              className="font-bold py-2 px-4 rounded-md hover:bg-blue-600"
             >
               Get Started
             </button>
           </div>
-          <div className="bg-white rounded-md shadow-md p-6 text-center">
-            <h3 className="text-xl font-bold text-gray-800 mb-2">
+          <div className="rounded-md shadow-md p-6 text-center">
+            <h3 className="text-xl font-bold mb-2">
               Pro Plan
             </h3>
-            <p className="text-gray-600 mb-4">
+            <p className="mb-4">
               Designed for larger firms. Includes all Basic Plan features plus
               advanced capabilities like legal drafting, automated case
               management, and client communication tools.
             </p>
-            <div className="font-bold text-gray-800 text-2xl mb-4">$999 One-Time Payment</div>
+            <div className="font-bold text-2xl mb-4">$999 One-Time Payment</div>
             <button
-              className="bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600"
+              className="font-bold py-2 px-4 rounded-md hover:bg-blue-600"
             >
               Get Started
             </button>
@@ -103,12 +103,12 @@ const StartupTemplate = () => {
       </section>
 
       <section className="container mx-auto py-12">
-        <h2 className="text-3xl font-bold text-gray-800 mb-4 text-center">
+        <h2 className="text-3xl font-bold mb-4 text-center">
           Testimonials
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-          <div className="bg-white rounded-md shadow-md p-6">
-            <p className="text-gray-600 mb-4">
+          <div className="rounded-md shadow-md p-6">
+            <p className="mb-4">
               "Since using this AI assistant, my productivity has skyrocketed! It
               handles tedious tasks, freeing up my time for more strategic
               work."
@@ -120,13 +120,13 @@ const StartupTemplate = () => {
                 className="w-10 h-10 rounded-full mr-4"
               />
               <div>
-                <p className="font-bold text-gray-800">Sarah Johnson</p>
-                <p className="text-gray-600">Solo Practitioner</p>
+                <p className="font-bold">Sarah Johnson</p>
+                <p>Solo Practitioner</p>
               </div>
             </div>
           </div>
-          <div className="bg-white rounded-md shadow-md p-6">
-            <p className="text-gray-600 mb-4">
+          <div className="rounded-md shadow-md p-6">
+            <p className="mb-4">
               "Our firm was struggling to keep up with the increasing workload.
               This AI solution has been a game-changer, allowing us to handle
               more cases efficiently."
@@ -138,13 +138,13 @@ const StartupTemplate = () => {
                 className="w-10 h-10 rounded-full mr-4"
               />
               <div>
-                <p className="font-bold text-gray-800">David Miller</p>
-                <p className="text-gray-600">Managing Partner, Law Firm</p>
+                <p className="font-bold">David Miller</p>
+                <p>Managing Partner, Law Firm</p>
               </div>
             </div>
           </div>
-          <div className="bg-white rounded-md shadow-md p-6">
-            <p className="text-gray-600 mb-4">
+          <div className="rounded-md shadow-md p-6">
+            <p className="mb-4">
               "The legal drafting feature has saved us countless hours. We can
               now produce high-quality documents with ease and accuracy."
             </p>
@@ -155,8 +155,8 @@ const StartupTemplate = () => {
                 className="w-10 h-10 rounded-full mr-4"
               />
               <div>
-                <p className="font-bold text-gray-800">Emily Brown</p>
-                <p className="text-gray-600">Associate Attorney</p>
+                <p className="font-bold">Emily Brown</p>
+                <p>Associate Attorney</p>
               </div>
             </div>
           </div>
@@ -164,15 +164,15 @@ const StartupTemplate = () => {
       </section>
 
       <section className="container mx-auto py-12">
-        <h2 className="text-3xl font-bold text-gray-800 mb-4 text-center">
+        <h2 className="text-3xl font-bold mb-4 text-center">
           See the Difference
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-          <div className="bg-red-100 rounded-md shadow-md p-6">
-            <h3 className="text-xl font-bold text-gray-800 mb-2">
+          <div className="rounded-md shadow-md p-6">
+            <h3 className="text-xl font-bold mb-2">
               Without AI Legal Assistant
             </h3>
-            <p className="text-gray-600 mb-4">
+            <p className="mb-4">
               - Time-consuming manual tasks
               - Difficulty managing caseloads
               - Risk of errors in legal documents
@@ -180,11 +180,11 @@ const StartupTemplate = () => {
               - Limited client communication tools
             </p>
           </div>
-          <div className="bg-green-100 rounded-md shadow-md p-6">
-            <h3 className="text-xl font-bold text-gray-800 mb-2">
+          <div className="rounded-md shadow-md p-6">
+            <h3 className="text-xl font-bold mb-2">
               With AI Legal Assistant
             </h3>
-            <p className="text-gray-600 mb-4">
+            <p className="mb-4">
               - Automated tasks for increased efficiency
               - Streamlined case management system
               - Accurate and error-free legal documents
