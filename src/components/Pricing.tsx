@@ -10,6 +10,7 @@ export const Pricing = () => {
         {
             name: 'Free',
             price: 0,
+            annualPrice: 0,
             features: [
                 'Basic features',
                 'Limited storage',
@@ -20,6 +21,7 @@ export const Pricing = () => {
         {
             name: 'Pro',
             price: 29,
+            annualPrice: 290,
             features: [
                 'All basic features',
                 'Unlimited storage',
@@ -31,6 +33,7 @@ export const Pricing = () => {
         {
             name: 'Enterprise',
             price: 99,
+            annualPrice: 990,
             features: [
                 'All pro features',
                 'Dedicated account manager',
@@ -72,13 +75,17 @@ export const Pricing = () => {
                     <motion.div
                         key={index}
                         className="rounded-lg shadow-md border p-6 hover:shadow-yellow-500 duration-300"
-                        // whileHover={{ scale: 1.05 }} // Removed scaling from the card
                         transition={{ duration: 0.2 }}
                     >
                         <h3 className="text-xl font-bold mb-4">{plan.name}</h3>
                         <div className="text-4xl font-bold mb-4">
-                            ${isAnnual ? plan.price * 12 : plan.price}/
+                            ${isAnnual ? plan.annualPrice : plan.price}/
                             {isAnnual ? 'year' : 'month'}
+                            {isAnnual && plan.annualPrice > 0 && (
+                                <span className="text-gray-500 font-medium ml-2">
+                                    (Save {Math.round(((plan.annualPrice - plan.price * 12) / plan.annualPrice) * 100)}%)
+                                </span>
+                            )}
                         </div>
                         <ul>
                             {plan.features.map((feature, i) => (
