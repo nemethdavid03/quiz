@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { Switch } from "./ui/switch";
+import React from 'react';
 
 export const Pricing = () => {
     const plans = [
