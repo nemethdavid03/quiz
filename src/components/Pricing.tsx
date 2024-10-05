@@ -68,8 +68,8 @@ export const Pricing = () => {
                         visible: { opacity: 1, y: 0 },
                         hidden: { opacity: 0, y: 20 },
                     }}
-                    initial="hidden"
-                    animate={isAnnual ? "visible" : "hidden"}
+                    initial="visible"
+                    animate="visible"
                     transition={{ duration: 0.2 }}
                 >
                     {isAnnual ? 'Annual' : 'Monthly'} Billing
@@ -90,14 +90,23 @@ export const Pricing = () => {
                             visible: { opacity: 1, y: 0 },
                             hidden: { opacity: 0, y: 20 },
                         }}
-                        initial="hidden"
-                        animate={isAnnual ? "visible" : "hidden"}
+                        initial="visible"
+                        animate="visible"
                     >
                         <h3 className="text-xl font-bold mb-4">{plan.name}</h3>
-                        <div className="text-4xl font-bold mb-4">
+                        <motion.div 
+                            className="text-4xl font-bold mb-4"
+                            variants={{
+                                annual: { opacity: 1, y: 0 },
+                                monthly: { opacity: 0, y: 20 },
+                            }}
+                            initial={isAnnual ? "annual" : "monthly"}
+                            animate={isAnnual ? "annual" : "monthly"}
+                            transition={{ duration: 0.3 }}
+                        >
                             ${isAnnual ? plan.annualPrice : plan.price}/
                             {isAnnual ? 'year' : 'month'}
-                        </div>
+                        </motion.div>
                         <ul>
                             {plan.features.map((feature, i) => (
                                 <li key={i}>
