@@ -98,14 +98,24 @@ export const Pricing = () => {
                             className="text-4xl font-bold mb-4"
                             variants={{
                                 annual: { opacity: 1, y: 0 },
-                                monthly: { opacity: 0, y: 20 },
+                                monthly: { opacity: 1, y: 0 },
                             }}
                             initial={isAnnual ? "annual" : "monthly"}
                             animate={isAnnual ? "annual" : "monthly"}
                             transition={{ duration: 0.3 }}
                         >
                             ${isAnnual ? plan.annualPrice : plan.price}/
-                            {isAnnual ? 'year' : 'month'}
+                            <motion.span 
+                                variants={{
+                                    annual: { opacity: 1, y: 0 },
+                                    monthly: { opacity: 1, y: 0 },
+                                }}
+                                initial={isAnnual ? "annual" : "monthly"}
+                                animate={isAnnual ? "annual" : "monthly"}
+                                transition={{ duration: 0.3 }}
+                            >
+                                {isAnnual ? 'year' : 'month'}
+                            </motion.span>
                         </motion.div>
                         <ul>
                             {plan.features.map((feature, i) => (
